@@ -19,7 +19,7 @@ class RequestViewResponceSmevCheck(BaseModel):
     smevIntegrationId: Optional[int]
 
 
-class RequestViewResponceList(BaseModel):
+class RequestViewResponseList(BaseModel):
     typeId: int
     typeName: str
 
@@ -33,7 +33,7 @@ class RequestViewResponse(BaseModel):
     statusId: int
     status: str
     requestId: int
-    list: list[RequestViewResponceList]
+    list: list[RequestViewResponseList]
     smevChecks: list[RequestViewResponceSmevCheck]
 
 
