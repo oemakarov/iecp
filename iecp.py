@@ -57,7 +57,7 @@ class IECP():
         """
         payload = RequestViewRequest(**(self.auth | {'requestId': request_id }))
         res = self.session.post(URL_METHOD_REQUEST_VIEW, 
-                                    data=payload.json(by_alias=True))
+                                    data=payload.model_dump_json(by_alias=True))
         return self._process_response(res, RequestViewResponse)
 
 
@@ -75,7 +75,7 @@ class IECP():
         """
         payload = RequestResultRequest(**(self.auth | {'requestId': request_id }))
         res = self.session.post(URL_METHOD_REQUEST_RESULT, 
-                                    data=payload.json(by_alias=True))
+                                    data=payload.model_dump_json(by_alias=True))
         return self._process_response(res, RequestResultResponse)
         
 
@@ -94,7 +94,7 @@ class IECP():
         """
         payload = RequestListRequest(**(self.auth | {'filter': filter }))
         res = self.session.post(URL_METHOD_REQUEST_LIST, 
-                                    data=payload.json(by_alias=True, 
+                                    data=payload.model_dump_json(by_alias=True, 
                                                         exclude_unset=True))
         return self._process_response(res, RequestListResponse)
 
@@ -114,7 +114,7 @@ class IECP():
         """
         payload = RequestCreateRequest(**(self.auth | {'info': info }))
         res = self.session.post(URL_METHOD_REQUEST_CREATE, 
-                                    data=payload.json(by_alias=True, 
+                                    data=payload.model_dump_json(by_alias=True, 
                                                         exclude_unset=True,
                                                         exclude_none=True))
         return self._process_response(res, RequestCreateResponse)
@@ -142,7 +142,7 @@ class IECP():
                 }
         payload = RequestChangeRequest(**(self.auth | payload_data))
         res = self.session.post(URL_METHOD_REQUEST_CHANGE, 
-                                    data=payload.json(by_alias=True, 
+                                    data=payload.model_dump_json(by_alias=True, 
                                                         exclude_unset=True,
                                                         exclude_none=True))
         return self._is_response_ok_text(res)
@@ -164,7 +164,7 @@ class IECP():
         """
 
         if self._is_response_ok(response):
-            return True, model.parse_raw(response.text)
+            return True, model.model_validate_json(response.text)
         else:
             if response.text:
                 return False, response.text
