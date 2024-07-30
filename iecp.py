@@ -115,7 +115,8 @@ class IECP():
         payload = RequestCreateRequest(**(self.auth | {'info': info }))
         res = self.session.post(URL_METHOD_REQUEST_CREATE, 
                                     data=payload.json(by_alias=True, 
-                                                        exclude_unset=True))
+                                                        exclude_unset=True,
+                                                        exclude_none=True))
         return self._process_response(res, RequestCreateResponse)
 
 

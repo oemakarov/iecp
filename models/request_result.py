@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, RootModel
 from typing import Optional
 
 from .common import (
@@ -17,5 +17,5 @@ class RequestResultResponseAttacment(BaseModel, Attachment):
     type: Optional[int]
 
 
-class RequestResultResponse(BaseModel):
-    __root__: list[RequestResultResponseAttacment]
+class RequestResultResponse(RootModel):
+    root: list[RequestResultResponseAttacment]
