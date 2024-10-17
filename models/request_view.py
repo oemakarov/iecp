@@ -1,5 +1,5 @@
 import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import Optional
 
 from .common import (
@@ -30,10 +30,13 @@ class RequestViewRequest(RequestLoginPass):
 
 class RequestViewResponse(BaseModel):
     info: RequestInfo
-    statusId: int
+    statusId: str
     status: str
-    requestId: int
+    requestId: str
     list: list[RequestViewResponseList]
     smevChecks: list[RequestViewResponceSmevCheck]
 
+    @field_validator('statusId', 'requestId', mode='before')
+    def parse_int_to_str(cls, value):
+        return str(value)
 
