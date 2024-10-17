@@ -34,7 +34,7 @@ class RequestViewResponse(BaseModel):
     status: str
     requestId: str
     list: list[RequestViewResponseList]
-    smevChecks: list[RequestViewResponceSmevCheck]
+    smevChecks: list[RequestViewResponceSmevCheck]  # type: ignore
 
     @field_validator('statusId', 'requestId', mode='before')
     def parse_int_to_str(cls, value):
