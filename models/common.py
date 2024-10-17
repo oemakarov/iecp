@@ -1,13 +1,13 @@
 import datetime
 from enum import Enum
-from pydantic import BaseModel, Field, field_validator, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 
 
 class Gender(Enum):
-    male = "M"
-    female = "F"
-    undefined = "U"
+    male = 'M'
+    female = 'F'
+    undefined = 'U'
 
 
 class ClientType(Enum):
@@ -18,7 +18,7 @@ class ClientType(Enum):
 
 class RequestLoginPass(BaseModel):
     login: str
-    password: str = Field(alias="pass")
+    password: str = Field(alias='pass')
 
 
 class ExistingCertsInFNS(BaseModel):
@@ -93,37 +93,34 @@ class RequestInfo(BaseModel):
     fnsCode: Optional[str]
     existingCertsInFNS: Optional[list[ExistingCertsInFNS]]
 
-    @field_validator("createDate", mode="before")
+    @field_validator('createDate', mode='before')
     def parse_date_time(cls, value):
-        return datetime.datetime.strptime(value, "%d.%m.%Y %H:%M:%S")
+        return datetime.datetime.strptime(value, '%d.%m.%Y %H:%M:%S')
 
-    @field_validator("passportDate", "birthDate", mode="before")
+    @field_validator('passportDate', 'birthDate', mode='before')
     def parse_date(cls, value):
-        return datetime.datetime.strptime(value, "%d.%m.%Y").date()
+        return datetime.datetime.strptime(value, '%d.%m.%Y').date()
 
-    @field_validator("phone", mode="before")
+    @field_validator('phone', mode='before')
     def parse_int_to_str(cls, value):
         return str(value)
 
-    @field_validator("snils", mode="before")
+    @field_validator('snils', mode='before')
     def format_snils(cls, value):
-        str_digits = "".join(char for char in value if char.isdigit())
+        str_digits = ''.join(char for char in value if char.isdigit())
         if len(str_digits) != 11:
             raise ValueError(f'Ошибка в формате snils : "{str_digits}"')
-        return f"{str_digits[:3]}-{str_digits[3:6]}-{str_digits[6:9]} {str_digits[9:]}"
+        return f'{str_digits[:3]}-{str_digits[3:6]}-{str_digits[6:9]} {str_digits[9:]}'
 
 
 class Attachment:
     def _attachment_content_save(self, content: str, filename: str):
         try:
-            with open(filename, "w") as f:
+            with open(filename, 'w') as f:
                 f.write(content)
                 return True, filename
         except Exception as e:
             raise e
-            # return False, None
 
     def download(self, filename: str = None):
-        return self._attachment_content_save(
-            content=self.contentBase64, filename=filename or self.name
-        )
+        return self._attachment_content_save(content=self.contentBase64, filename=filename or self.name)

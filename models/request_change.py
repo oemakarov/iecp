@@ -1,8 +1,8 @@
 from typing import Optional
 
 from .common import (
-        RequestLoginPass,
-        RequestInfo,
+    RequestLoginPass,
+    RequestInfo,
 )
 
 
@@ -10,5 +10,3 @@ class RequestChangeRequest(RequestLoginPass):
     requestId: int
     requestArchived: Optional[bool]
     info: Optional[RequestInfo]
-
-

@@ -1,4 +1,3 @@
-
 BASE_URL = 'https://apinew.iecp.ru/api/external/v2'
 URL_METHOD_REQUEST_VIEW = BASE_URL + '/request/view'
 URL_METHOD_REQUEST_RESULT = BASE_URL + '/request/result'

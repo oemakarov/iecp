@@ -2,9 +2,10 @@ from pydantic import BaseModel, RootModel
 from typing import Optional
 
 from .common import (
-        RequestLoginPass,
-        Attachment,
+    RequestLoginPass,
+    Attachment,
 )
+
 
 class RequestResultRequest(RequestLoginPass):
     requestId: int

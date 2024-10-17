@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from typing import Optional
 
 from .common import (
-        RequestLoginPass,
-        RequestInfo,
+    RequestLoginPass,
+    RequestInfo,
 )
 
 
@@ -13,5 +13,3 @@ class RequestCreateResponse(BaseModel):
 
 class RequestCreateRequest(RequestLoginPass):
     info: RequestInfo
-
-

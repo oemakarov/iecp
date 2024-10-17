@@ -1,11 +1,8 @@
 from typing import Union
 
 from .common import (
-        RequestLoginPass,
+    RequestLoginPass,
 )
-
-# class RequestAttachFileResponse(BaseModel):
-#     requestId: Optional[int]
 
 
 class RequestAttachFileRequest(RequestLoginPass):
@@ -13,4 +10,3 @@ class RequestAttachFileRequest(RequestLoginPass):
     file: Union[str, bytes]
     fileType: int
     requestId: int
-

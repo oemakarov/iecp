@@ -3,8 +3,8 @@ from pydantic import BaseModel, field_validator
 from typing import Optional
 
 from .common import (
-        RequestInfo,
-        RequestLoginPass,
+    RequestInfo,
+    RequestLoginPass,
 )
 
 
@@ -39,4 +39,3 @@ class RequestViewResponse(BaseModel):
     @field_validator('statusId', 'requestId', mode='before')
     def parse_int_to_str(cls, value):
         return str(value)
-
